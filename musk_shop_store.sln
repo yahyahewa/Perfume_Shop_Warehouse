@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "musk_shop_store", "musk_shop_store\musk_shop_store.csproj", "{4355A237-CE6E-44A3-B5DA-DD2783436624}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4355A237-CE6E-44A3-B5DA-DD2783436624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4355A237-CE6E-44A3-B5DA-DD2783436624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4355A237-CE6E-44A3-B5DA-DD2783436624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4355A237-CE6E-44A3-B5DA-DD2783436624}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4854BDE4-8765-4005-B161-CB6EABE977A1}
+	EndGlobalSection
+EndGlobal

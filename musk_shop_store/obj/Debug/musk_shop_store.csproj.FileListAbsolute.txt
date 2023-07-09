@@ -1,0 +1,115 @@
+P:\musk_shop_store\musk_shop_store\bin\Debug\musk_shop_store.exe.config
+P:\musk_shop_store\musk_shop_store\bin\Debug\musk_shop_store.exe
+P:\musk_shop_store\musk_shop_store\bin\Debug\musk_shop_store.pdb
+P:\musk_shop_store\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+P:\musk_shop_store\musk_shop_store\bin\Debug\XanderUI.dll
+P:\musk_shop_store\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.csproj.AssemblyReference.cache
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.Properties.Resources.resources
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.csproj.GenerateResource.cache
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CoreCompileInputs.cache
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CopyComplete
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.exe
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.pdb
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.loggin.resources
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.mainForm.resources
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.category.resources
+P:\musk_shop_store\musk_shop_store\obj\Debug\musk_shop_store.product.resources
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.exe.config
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.exe
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.pdb
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.AssemblyReference.cache
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.SuggestedBindingRedirects.cache
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.category.resources
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.loggin.resources
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.mainForm.resources
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.product.resources
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.Properties.Resources.resources
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.GenerateResource.cache
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CoreCompileInputs.cache
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CopyComplete
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.exe
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.pdb
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.dll
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.dll
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.xml
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DELL 7400\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.xml
+D:\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.exe.config
+D:\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.exe
+D:\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.pdb
+D:\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.dll
+D:\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.SqlServer.dll
+D:\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.dll
+D:\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.EF6.dll
+D:\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.Linq.dll
+D:\musk-shop-store\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+D:\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.xml
+D:\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.SqlServer.xml
+D:\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.xml
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.AssemblyReference.cache
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.SuggestedBindingRedirects.cache
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.category.resources
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.loggin.resources
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.mainForm.resources
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.product.resources
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.Properties.Resources.resources
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.GenerateResource.cache
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CoreCompileInputs.cache
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CopyComplete
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.exe
+D:\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.pdb
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.exe.config
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.exe
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\musk_shop_store.pdb
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.dll
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.dll
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\XanderUI.dll
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.xml
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\bin\Debug\System.Data.SQLite.xml
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.AssemblyReference.cache
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.category.resources
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.loggin.resources
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.mainForm.resources
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.product.resources
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.Properties.Resources.resources
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.GenerateResource.cache
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CoreCompileInputs.cache
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.csproj.CopyComplete
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.exe
+C:\Users\yahya\Source\Repos\musk-shop-store\musk_shop_store\obj\Debug\musk_shop_store.pdb
+P:\a\musk_shop_store\bin\Debug\musk_shop_store.exe.config
+P:\a\musk_shop_store\bin\Debug\musk_shop_store.exe
+P:\a\musk_shop_store\bin\Debug\musk_shop_store.pdb
+P:\a\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+P:\a\musk_shop_store\bin\Debug\EntityFramework.dll
+P:\a\musk_shop_store\bin\Debug\EntityFramework.SqlServer.dll
+P:\a\musk_shop_store\bin\Debug\System.Data.SQLite.dll
+P:\a\musk_shop_store\bin\Debug\System.Data.SQLite.EF6.dll
+P:\a\musk_shop_store\bin\Debug\System.Data.SQLite.Linq.dll
+P:\a\musk_shop_store\bin\Debug\XanderUI.dll
+P:\a\musk_shop_store\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+P:\a\musk_shop_store\bin\Debug\EntityFramework.xml
+P:\a\musk_shop_store\bin\Debug\EntityFramework.SqlServer.xml
+P:\a\musk_shop_store\bin\Debug\System.Data.SQLite.xml
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.csproj.AssemblyReference.cache
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.category.resources
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.loggin.resources
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.mainForm.resources
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.product.resources
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.Properties.Resources.resources
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.csproj.GenerateResource.cache
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.csproj.CoreCompileInputs.cache
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.csproj.CopyComplete
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.exe
+P:\a\musk_shop_store\obj\Debug\musk_shop_store.pdb
