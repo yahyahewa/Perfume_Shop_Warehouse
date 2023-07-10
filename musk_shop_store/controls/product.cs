@@ -92,6 +92,7 @@ namespace musk_shop_store
         ///------ resize product list -------/////////
         private void resizeProductList()
         {
+            //chooseDesignDatagrideView();
             //foreach (Panel p in productListPanel.Controls)
             //{
             //    int left = 3;
@@ -144,7 +145,7 @@ namespace musk_shop_store
             //productListPanel.Controls.Clear();
         }
         //------ retrive product ----------////
-        private void retriveProduct(string name, string categorey, string gender)
+        private void chooseDesignDatagrideView()
         {
             // Customize the default cell style
             dataGridView1.DefaultCellStyle.BackColor = Color.White;
@@ -171,40 +172,67 @@ namespace musk_shop_store
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.ColumnHeadersHeight = 50;
-            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.EnableHeadersVisualStyles = false;// Adjust cell height
 
+            //dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            // Adjust row height // Specify the desired height in pixels
+
+        }
+        private void retriveProduct(string name, string categorey, string gender)
+        {
+            chooseDesignDatagrideView();
+            dataGridView1.Columns.Clear();
             // Create a DataGridViewImageColumn
             DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-            imageColumn.Name = "Image"; // Replace with your desired column name
-            //imageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch; // Set the desired image size mode to stretch
-            imageColumn.FillWeight = 2000;
-            // Add the column to the DataGridView
+            imageColumn.Name = "Image"; 
+            //imageColumn.FillWeight = 200;
             dataGridView1.Columns.Add(imageColumn);
+            ///////////////////////////////////////////////////////////////////////
+            DataGridViewTextBoxColumn textColumn = new DataGridViewTextBoxColumn();
+            textColumn.Name = "Name";
+            //textColumn.FillWeight = 200;
+            dataGridView1.Columns.Add(textColumn);
             // Assuming you have a list of image paths
-            List<string> imagePaths = new List<string>()
+            prp.Connection.Close();
+            prp.Connection.Open();
+            adapter = new OleDbDataAdapter("SELECT category_sh.name, product_sh.*, img_product_sh.img FROM (category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh ON product_sh.ID = img_product_sh.prd_id;", prp.Connection);
+            dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            prp.Connection.Close();
+            foreach(DataRow rows in dataTable.Rows)
             {
-                @"P:\a\musk_shop_store\bin\Debug\image\product\1.jpeg",
-                @"P:\a\musk_shop_store\bin\Debug\image\product\2.jpeg",
-                @"P:\a\musk_shop_store\bin\Debug\image\product\3.jpeg",
-            };
-            foreach (string imagePath in imagePaths)
-            {
-                if (File.Exists(imagePath))
-                {
-                    Image image = Image.FromFile(imagePath);
 
-                    DataGridViewRow row = new DataGridViewRow();
+                object images= rows["img"];
+                object prdName = rows["product_sh.name"];
+                object gender_ = rows["gender"];
+                object status = rows["status_"];
+                object brand = rows["category_sh.name"];
+                /////////////////////////////////////////////////////////////////////////////////////////////
+
+                DataGridViewRow row = new DataGridViewRow();
+                    row.Height = 100;
                     DataGridViewImageCell imageCell = new DataGridViewImageCell();
-                    imageCell.Value = image;
                     imageCell.ImageLayout = DataGridViewImageCellLayout.Stretch;
                     row.Cells.Add(imageCell);
-                    dataGridView1.Rows.Add(row);
+                if (File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + images + ".jpeg"))
+                {
+                    Image image = Image.FromFile(Environment.CurrentDirectory + "\\image\\product\\" + images + ".jpeg");
+                   
+                    imageCell.Value = image;
                 }
+                    ///////////////////////////////////////////////////////////
+                    DataGridViewTextBoxCell textCell = new DataGridViewTextBoxCell();
+                    textCell.Value =prdName;
+                    row.Cells.Add(textCell);
+                    dataGridView1.Rows.Add(row);
+                //MessageBox.Show(otherCellValue.ToString());
             }
 
 
-            prp.Connection.Close();
-            resizeProductList();
+                prp.Connection.Close();
+            //resizeProductList();
         }
         ///------ upload image-------/////////
         private void uploadIamge(string type, string id)
