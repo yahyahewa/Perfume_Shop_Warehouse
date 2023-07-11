@@ -86,11 +86,11 @@ namespace musk_shop_store
             label5.Left = GenderAdd.Left - 5;
             BtnAdd.Left = auto + 460;
             label6.Left = BtnAdd.Left - 5;
-            resizeProductList();
+            ResizeProductList();
 
         }
         ///------ resize product list -------/////////
-        private void resizeProductList()
+        private void ResizeProductList()
         {
             //chooseDesignDatagrideView();
             //foreach (Panel p in productListPanel.Controls)
@@ -141,7 +141,7 @@ namespace musk_shop_store
 
         private void ImageAdd_Click(object sender, EventArgs e)
         {
-            uploadIamge("add", "");
+            UploadIamge("add", "");
             //productListPanel.Controls.Clear();
         }
         //------ retrive product ----------////
@@ -149,93 +149,99 @@ namespace musk_shop_store
         {
             // Customize the default cell style
             dataGridView1.DefaultCellStyle.BackColor = Color.White;
-            dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
-            dataGridView1.DefaultCellStyle.Font = new Font("Arial", 10);
-
-            // Customize the header cell style
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView1.DefaultCellStyle.ForeColor = Color.FromArgb(5,5,5);
+            dataGridView1.DefaultCellStyle.Font = new Font("Arial", 15);
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 15, FontStyle.Bold);
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
             dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.RowsDefaultCellStyle.BackColor = Color.LightGray;
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
-            // Auto-size columns based on their contents
-            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            // Set a minimum height for rows
-            //dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            //dataGridView1.RowsDefaultCellStyle.Minimum = 50;
             dataGridView1.GridColor = Color.LightGray;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.ColumnHeadersHeight = 50;
             dataGridView1.EnableHeadersVisualStyles = false;// Adjust cell height
 
-            //dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            //dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-            // Adjust row height // Specify the desired height in pixels
 
         }
         private void retriveProduct(string name, string categorey, string gender)
         {
             chooseDesignDatagrideView();
             dataGridView1.Columns.Clear();
-            // Create a DataGridViewImageColumn
+            ///////////////////////////////////////////////////////////////////////
+            DataGridViewTextBoxColumn numberColumn = new DataGridViewTextBoxColumn();
+            numberColumn.Name = "No";
+            numberColumn.Width = 75;
+            dataGridView1.Columns.Add(numberColumn);
+            ///////////////////////////////////////////////////////////////////////
             DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
             imageColumn.Name = "Image"; 
-            //imageColumn.FillWeight = 200;
             dataGridView1.Columns.Add(imageColumn);
-            ///////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////
             DataGridViewTextBoxColumn textColumn = new DataGridViewTextBoxColumn();
             textColumn.Name = "Name";
-            //textColumn.FillWeight = 200;
             dataGridView1.Columns.Add(textColumn);
-            // Assuming you have a list of image paths
+            ///////////////////////////////////////////////////////////////////////
+            DataGridViewComboBoxColumn brandColumn = new DataGridViewComboBoxColumn();
+            brandColumn.Name = "Brand";
+            dataGridView1.Columns.Add(brandColumn);
+            ///////////////////////////////////////////////////////////////////////////
             prp.Connection.Close();
             prp.Connection.Open();
             adapter = new OleDbDataAdapter("SELECT category_sh.name, product_sh.*, img_product_sh.img FROM (category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh ON product_sh.ID = img_product_sh.prd_id;", prp.Connection);
             dataTable = new DataTable();
             adapter.Fill(dataTable);
             prp.Connection.Close();
+            int i = 1;
             foreach(DataRow rows in dataTable.Rows)
             {
-
                 object images= rows["img"];
                 object prdName = rows["product_sh.name"];
                 object gender_ = rows["gender"];
                 object status = rows["status_"];
                 object brand = rows["category_sh.name"];
-                /////////////////////////////////////////////////////////////////////////////////////////////
-
+                ////////////////////////////////////////////////////////////////////
                 DataGridViewRow row = new DataGridViewRow();
-                    row.Height = 100;
-                    DataGridViewImageCell imageCell = new DataGridViewImageCell();
+                DataGridViewTextBoxCell numberCell = new DataGridViewTextBoxCell();
+                numberCell.Value = i;
+                row.Cells.Add(numberCell);
+                ////////////////////////////////////////////////////////////////////
+                row.Height = 50;
+                DataGridViewImageCell imageCell = new DataGridViewImageCell();
                     imageCell.ImageLayout = DataGridViewImageCellLayout.Stretch;
                     row.Cells.Add(imageCell);
+                string imagePath = Environment.CurrentDirectory + "\\image\\download.png";
                 if (File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + images + ".jpeg"))
                 {
-                    Image image = Image.FromFile(Environment.CurrentDirectory + "\\image\\product\\" + images + ".jpeg");
-                   
-                    imageCell.Value = image;
+                    imagePath = Environment.CurrentDirectory + "\\image\\product\\" + images + ".jpeg";
                 }
-                    ///////////////////////////////////////////////////////////
-                    DataGridViewTextBoxCell textCell = new DataGridViewTextBoxCell();
-                    textCell.Value =prdName;
-                    row.Cells.Add(textCell);
-                    dataGridView1.Rows.Add(row);
-                //MessageBox.Show(otherCellValue.ToString());
+                    Image image = Image.FromFile(imagePath);
+                    imageCell.Value = image;
+                ///////////////////////////////////////////////////////////
+                DataGridViewTextBoxCell productCell = new DataGridViewTextBoxCell();
+                productCell.Value = prdName;
+                row.Cells.Add(productCell);
+                ////////////////////////////////////////////////////////
+                DataGridViewComboBoxCell brandCell=new DataGridViewComboBoxCell();
+                brandCell.Value = "bbbb";
+                int rowIndex = 0; // Replace with the desired row index
+                int columnIndex = dataGridView1.Columns["Brand"].Index; // Replace "Brand" with the actual column name
+                dataGridView1[columnIndex, rowIndex] = brandCell;
+                brandCell.FlatStyle = FlatStyle.Flat;
+                //row.Cells.Add(brandCell);
+                ////////////////////////////////////////////////////////
+                dataGridView1.Rows.Add(row); 
+                i++;
             }
-
-
                 prp.Connection.Close();
             //resizeProductList();
         }
         ///------ upload image-------/////////
-        private void uploadIamge(string type, string id)
+        private void UploadIamge(string type, string id)
         {
             // open file dialog   
             OpenFileDialog open = new OpenFileDialog();
@@ -245,8 +251,6 @@ namespace musk_shop_store
             {
                 try
                 {
-                    // image file path  
-
                     Random random = new Random();
                     newfileName = "" + "" + DateTime.Now.Year + "_" +
                        "" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second + "_"
@@ -316,6 +320,8 @@ namespace musk_shop_store
             else if (GenderAdd.Text != "Fe-Male" || GenderAdd.Text != "Male") { MessageBox.Show("Please Choose Right Gender!"); ; GenderAdd.Focus(); }
         }
 
-   
+        private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
+        {
+        }
     }
 }

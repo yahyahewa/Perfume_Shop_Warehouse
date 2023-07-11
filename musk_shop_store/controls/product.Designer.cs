@@ -31,6 +31,7 @@ namespace musk_shop_store
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.AddPanel = new System.Windows.Forms.Panel();
             this.BtnAdd = new System.Windows.Forms.PictureBox();
             this.isSearch = new System.Windows.Forms.CheckBox();
@@ -45,14 +46,13 @@ namespace musk_shop_store
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.AddPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageAdd)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -77,6 +77,16 @@ namespace musk_shop_store
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(884, 532);
             this.panel1.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 87);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(884, 445);
+            this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView1_Scroll);
             // 
             // AddPanel
             // 
@@ -239,15 +249,6 @@ namespace musk_shop_store
             this.label1.TabIndex = 0;
             this.label1.Text = "Search";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 87);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(884, 445);
-            this.dataGridView1.TabIndex = 3;
-            // 
             // product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,13 +261,13 @@ namespace musk_shop_store
             this.SizeChanged += new System.EventHandler(this.product_SizeChanged);
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.AddPanel.ResumeLayout(false);
             this.AddPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageAdd)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
