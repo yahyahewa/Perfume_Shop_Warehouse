@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\musk_shop_store",
+    "\\musk_shop_store\\controls"
   ],
-  "SelectedNode": "\\musk_shop_store.sln",
+  "SelectedNode": "\\musk_shop_store\\controls\\product.cs",
   "PreviewInSolutionExplorer": false
 }

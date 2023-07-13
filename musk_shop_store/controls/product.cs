@@ -144,100 +144,49 @@ namespace musk_shop_store
             UploadIamge("add", "");
             //productListPanel.Controls.Clear();
         }
-        //------ retrive product ----------////
-        private void chooseDesignDatagrideView()
-        {
-            // Customize the default cell style
-            dataGridView1.DefaultCellStyle.BackColor = Color.White;
-            dataGridView1.DefaultCellStyle.ForeColor = Color.FromArgb(5,5,5);
-            dataGridView1.DefaultCellStyle.Font = new Font("Arial", 15);
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.White;
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 15, FontStyle.Bold);
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.RowsDefaultCellStyle.BackColor = Color.LightGray;
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
-            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dataGridView1.GridColor = Color.LightGray;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridView1.ColumnHeadersHeight = 50;
-            dataGridView1.EnableHeadersVisualStyles = false;// Adjust cell height
-
-
-        }
+        /// ------------ retrive my products-------------/
+        int top;int height = 60;
         private void retriveProduct(string name, string categorey, string gender)
         {
-            chooseDesignDatagrideView();
-            dataGridView1.Columns.Clear();
-            ///////////////////////////////////////////////////////////////////////
-            DataGridViewTextBoxColumn numberColumn = new DataGridViewTextBoxColumn();
-            numberColumn.Name = "No";
-            numberColumn.Width = 75;
-            dataGridView1.Columns.Add(numberColumn);
-            ///////////////////////////////////////////////////////////////////////
-            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-            imageColumn.Name = "Image"; 
-            dataGridView1.Columns.Add(imageColumn);
-            /////////////////////////////////////////////////////////////////////////
-            DataGridViewTextBoxColumn textColumn = new DataGridViewTextBoxColumn();
-            textColumn.Name = "Name";
-            dataGridView1.Columns.Add(textColumn);
-            ///////////////////////////////////////////////////////////////////////
-            DataGridViewComboBoxColumn brandColumn = new DataGridViewComboBoxColumn();
-            brandColumn.Name = "Brand";
-            dataGridView1.Columns.Add(brandColumn);
-            ///////////////////////////////////////////////////////////////////////////
+            foreach (Control panel in productListPanel.Controls)
+            {
+                foreach(Control control in panel.Controls)
+                {
+                    //control.Dispose();
+                }
+                panel.Controls.Clear();
+                //panel.Dispose();
+            }
+
+
+            productListPanel.Controls.Clear();
+
+            top = 0;
             prp.Connection.Close();
             prp.Connection.Open();
-            adapter = new OleDbDataAdapter("SELECT category_sh.name, product_sh.*, img_product_sh.img FROM (category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh ON product_sh.ID = img_product_sh.prd_id;", prp.Connection);
-            dataTable = new DataTable();
-            adapter.Fill(dataTable);
-            prp.Connection.Close();
-            int i = 1;
-            foreach(DataRow rows in dataTable.Rows)
+            cmd = new OleDbCommand("SELECT  category_sh.name, product_sh.*, img_product_sh.img FROM (category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh ON product_sh.ID = img_product_sh.prd_id;", prp.Connection);
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
             {
-                object images= rows["img"];
-                object prdName = rows["product_sh.name"];
-                object gender_ = rows["gender"];
-                object status = rows["status_"];
-                object brand = rows["category_sh.name"];
-                ////////////////////////////////////////////////////////////////////
-                DataGridViewRow row = new DataGridViewRow();
-                DataGridViewTextBoxCell numberCell = new DataGridViewTextBoxCell();
-                numberCell.Value = i;
-                row.Cells.Add(numberCell);
-                ////////////////////////////////////////////////////////////////////
-                row.Height = 50;
-                DataGridViewImageCell imageCell = new DataGridViewImageCell();
-                    imageCell.ImageLayout = DataGridViewImageCellLayout.Stretch;
-                    row.Cells.Add(imageCell);
-                string imagePath = Environment.CurrentDirectory + "\\image\\download.png";
-                if (File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + images + ".jpeg"))
-                {
-                    imagePath = Environment.CurrentDirectory + "\\image\\product\\" + images + ".jpeg";
-                }
-                    Image image = Image.FromFile(imagePath);
-                    imageCell.Value = image;
-                ///////////////////////////////////////////////////////////
-                DataGridViewTextBoxCell productCell = new DataGridViewTextBoxCell();
-                productCell.Value = prdName;
-                row.Cells.Add(productCell);
-                ////////////////////////////////////////////////////////
-                DataGridViewComboBoxCell brandCell=new DataGridViewComboBoxCell();
-                brandCell.Value = "bbbb";
-                int rowIndex = 0; // Replace with the desired row index
-                int columnIndex = dataGridView1.Columns["Brand"].Index; // Replace "Brand" with the actual column name
-                dataGridView1[columnIndex, rowIndex] = brandCell;
-                brandCell.FlatStyle = FlatStyle.Flat;
-                //row.Cells.Add(brandCell);
-                ////////////////////////////////////////////////////////
-                dataGridView1.Rows.Add(row); 
-                i++;
+                ////---- create a panel object -----///
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                panel.Width = Convert.ToInt32(panel1.Width * 0.97);
+                panel.Height = 60;
+                productListPanel.Controls.Add(panel);
+                ////---- create the list number -----///
+                Label listNum = new Label();
+                listNum.AutoSize = true;
+                listNum.Text = top.ToString();
+                listNum.Width = label1.Width;
+                listNum.Height = height;
+                listNum.TextAlign=ContentAlignment.MiddleCenter;
+                panel.Controls.Add(listNum);
+                ////------ finaly ----------------/////
+                if (top % 2 == 0) { panel.BackColor =Color.FromArgb(230, 230, 230); }
+                top++;
             }
-                prp.Connection.Close();
+
+            prp.Connection.Close();
             //resizeProductList();
         }
         ///------ upload image-------/////////
@@ -297,7 +246,7 @@ namespace musk_shop_store
         {
             if (NameAdd.Text != "" && checkBrand() == true && (GenderAdd.Text == "Fe-Male" || GenderAdd.Text == "Male"))
             {
-            //    BtnAdd.Image = new Bitmap("C:\\Users\\DELL 7400\\Downloads\\loader.png");
+                //    BtnAdd.Image = new Bitmap("C:\\Users\\DELL 7400\\Downloads\\loader.png");
                 //BtnAdd.Enabled = false;
                 if (prp.query("insert into product_sh(name,ctg_id,gender,status_) " +
                     "values('" + NameAdd.Text + "'," + categorey[BrandAdd.SelectedIndex, 0] + ",'" + GenderAdd.SelectedItem + "','active')"))
@@ -313,15 +262,12 @@ namespace musk_shop_store
                     }
                     retriveProduct("", "", "");
                 }
-               // BtnAdd.Image = new Bitmap("C:\\Users\\DELL 7400\\Downloads\\plus.png");
+                // BtnAdd.Image = new Bitmap("C:\\Users\\DELL 7400\\Downloads\\plus.png");
                 //BtnAdd.Enabled = true;
             }
             else if (NameAdd.Text == "") { MessageBox.Show("Please Fill Name Box"); NameAdd.Focus(); }
             else if (GenderAdd.Text != "Fe-Male" || GenderAdd.Text != "Male") { MessageBox.Show("Please Choose Right Gender!"); ; GenderAdd.Focus(); }
         }
 
-        private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
-        {
-        }
     }
 }
