@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.IO;
+using System.Diagnostics;
 
 namespace musk_shop_store
 {
@@ -145,22 +146,10 @@ namespace musk_shop_store
             //productListPanel.Controls.Clear();
         }
         /// ------------ retrive my products-------------/
-        int top;int height = 60;
+        int top;int height = 60;string ImageProductPath = "D:\\perfume_shop_storg\\musk_shop_store\\bin\\Debug\\image\\download.png";
         private void retriveProduct(string name, string categorey, string gender)
         {
-            foreach (Control panel in productListPanel.Controls)
-            {
-                foreach(Control control in panel.Controls)
-                {
-                    //control.Dispose();
-                }
-                panel.Controls.Clear();
-                //panel.Dispose();
-            }
-
-
             productListPanel.Controls.Clear();
-
             top = 0;
             prp.Connection.Close();
             prp.Connection.Open();
@@ -175,12 +164,22 @@ namespace musk_shop_store
                 productListPanel.Controls.Add(panel);
                 ////---- create the list number -----///
                 Label listNum = new Label();
-                listNum.AutoSize = true;
                 listNum.Text = top.ToString();
-                listNum.Width = label1.Width;
+                listNum.Width = label1.Width+20;
                 listNum.Height = height;
                 listNum.TextAlign=ContentAlignment.MiddleCenter;
                 panel.Controls.Add(listNum);
+                ////---- create the image -----///
+                PictureBox image =new PictureBox();
+                image.Width = ImageAdd.Width;
+                image.Height = 60;
+                if(File.Exists(Environment.CurrentDirectory + "\\image\\product" + dataReader["img"] + ".jpeg"))
+                {
+                    ImageProductPath = Environment.CurrentDirectory + "\\image\\product" + dataReader["img"] + ".jpeg";
+                }
+                image.Image = new Bitmap(ImageProductPath);
+                panel.Controls.Add(image);
+                image.SizeMode = PictureBoxSizeMode.Zoom;
                 ////------ finaly ----------------/////
                 if (top % 2 == 0) { panel.BackColor =Color.FromArgb(230, 230, 230); }
                 top++;
@@ -244,6 +243,18 @@ namespace musk_shop_store
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+
+
+            foreach (Control panel in productListPanel.Controls)
+            {
+                foreach (Control control in panel.Controls)
+                {
+                    control.Dispose();
+                }
+                panel.Controls.Clear();
+                panel.Dispose();
+            }
+            productListPanel.Controls.Clear();
             if (NameAdd.Text != "" && checkBrand() == true && (GenderAdd.Text == "Fe-Male" || GenderAdd.Text == "Male"))
             {
                 //    BtnAdd.Image = new Bitmap("C:\\Users\\DELL 7400\\Downloads\\loader.png");
