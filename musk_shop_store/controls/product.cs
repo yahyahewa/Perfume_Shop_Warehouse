@@ -67,29 +67,6 @@ namespace musk_shop_store
             }
             prp.Connection.Close();
         }
-        ///---- rsize add product control -------/////
-        private void resizeAddProductBar()
-        {
-            int value = 270;
-            if (AddPanel.Width < 700) { value = 170; }
-            int auto = AddPanel.Width - isSearch.Width - ImageAdd.Width - value - BrandAdd.Width - GenderAdd.Width - BtnAdd.Width;
-            isSearch.Left = 40;
-            isSearch.Top = 15;
-            label1.Left = 5;
-            ImageAdd.Left = 135;
-            label2.Left = ImageAdd.Left - 5;
-            NameAdd.Width = auto;
-            NameAdd.Left = 210;
-            label3.Left = NameAdd.Left - 5;
-            BrandAdd.Left = auto + 220;
-            label4.Left = BrandAdd.Left - 5;
-            GenderAdd.Left = auto + 350;
-            label5.Left = GenderAdd.Left - 5;
-            BtnAdd.Left = auto + 460;
-            label6.Left = BtnAdd.Left - 5;
-            ResizeProductList();
-
-        }
         ///------ resize product list -------/////////
         private void ResizeProductList()
         {
@@ -145,10 +122,43 @@ namespace musk_shop_store
             UploadIamge("add", "");
             //productListPanel.Controls.Clear();
         }
+        ///---- rsize add product control -------/////
+        private void resizeAddProductBar()
+        {
+            int value = 270;
+            if (AddPanel.Width < 700) { value = 170; }
+            int auto = AddPanel.Width - isSearch.Width - ImageAdd.Width - value - BrandAdd.Width - GenderAdd.Width - BtnAdd.Width;
+            isSearch.Left = 40;
+            isSearch.Top = 15;
+            label1.Left = 5;
+            ImageAdd.Left = 135;
+            label2.Left = ImageAdd.Left - 5;
+            NameAdd.Width = auto;
+            NameAdd.Left = 210;
+            label3.Left = NameAdd.Left - 5;
+            BrandAdd.Left = auto + 220;
+            label4.Left = BrandAdd.Left - 5;
+            GenderAdd.Left = auto + 350;
+            label5.Left = GenderAdd.Left - 5;
+            BtnAdd.Left = auto + 460;
+            label6.Left = BtnAdd.Left - 5;
+            ResizeProductList();
+
+        }
         /// ------------ retrive my products-------------/
-        int top;int height = 60;string ImageProductPath = "D:\\perfume_shop_storg\\musk_shop_store\\bin\\Debug\\image\\download.png";
+        int top;int height = 60;string ImageProductPath;
         private void retriveProduct(string name, string categorey, string gender)
         {
+            foreach (FlowLayoutPanel flow in productListPanel.Controls)
+            {
+                foreach (Control control in flow.Controls)
+                {
+                    flow.Controls.Remove(control);
+                    control.Dispose();
+                }
+                productListPanel.Controls.Remove(flow);
+                flow.Dispose();
+            }
             productListPanel.Controls.Clear();
             top = 0;
             prp.Connection.Close();
@@ -164,24 +174,33 @@ namespace musk_shop_store
                 productListPanel.Controls.Add(panel);
                 ////---- create the list number -----///
                 Label listNum = new Label();
-                listNum.Text = top.ToString();
-                listNum.Width = label1.Width+20;
+                listNum.Text = "  "+top.ToString();
+                listNum.Width = label1.Width+50;
                 listNum.Height = height;
-                listNum.TextAlign=ContentAlignment.MiddleCenter;
+                listNum.TextAlign=ContentAlignment.MiddleLeft;
                 panel.Controls.Add(listNum);
                 ////---- create the image -----///
                 PictureBox image =new PictureBox();
-                image.Width = ImageAdd.Width;
-                image.Height = 60;
-                if(File.Exists(Environment.CurrentDirectory + "\\image\\product" + dataReader["img"] + ".jpeg"))
+                image.Width = ImageAdd.Width ;
+                image.Height = 55; 
+                ImageProductPath = Environment.CurrentDirectory + "\\image\\download.png";
+                if (File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg"))
                 {
-                    ImageProductPath = Environment.CurrentDirectory + "\\image\\product" + dataReader["img"] + ".jpeg";
+                    ImageProductPath = Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg";
                 }
                 image.Image = new Bitmap(ImageProductPath);
                 panel.Controls.Add(image);
                 image.SizeMode = PictureBoxSizeMode.Zoom;
+                ///------- create a textbox for name -------//
+                RichTextBox txtName = new RichTextBox();
+                txtName.BorderStyle= BorderStyle.None;
+                txtName.Text = dataReader["product_sh.name"].ToString();
+                txtName.Height = 55;
+                txtName.Width = NameAdd.Width;
+                panel.Controls.Add(txtName);
                 ////------ finaly ----------------/////
-                if (top % 2 == 0) { panel.BackColor =Color.FromArgb(230, 230, 230); }
+                if (top % 2 == 0) 
+                { panel.BackColor =Color.FromArgb(230, 230, 230); txtName.BackColor = Color.FromArgb(230, 230, 230); }
                 top++;
             }
 
