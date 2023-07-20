@@ -81,6 +81,7 @@ namespace musk_shop_store
             // 
             this.productListPanel.AutoScroll = true;
             this.productListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productListPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
             this.productListPanel.Location = new System.Drawing.Point(0, 87);
             this.productListPanel.Name = "productListPanel";
             this.productListPanel.Size = new System.Drawing.Size(884, 445);

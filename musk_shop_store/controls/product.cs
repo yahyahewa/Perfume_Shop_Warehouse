@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.IO;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace musk_shop_store
 {
@@ -71,24 +72,24 @@ namespace musk_shop_store
         private void ResizeProductList()
         {
             //chooseDesignDatagrideView();
-            //foreach (Panel p in productListPanel.Controls)
-            //{
-            //    int left = 3;
-            //    p.Width = Convert.ToInt32(productListPanel.Width * 0.97);
-            //    foreach (Control chCntr in p.Controls)
-            //    {
-            //        string[] name = chCntr.Name.Split(',');
-            //        if (name.Length > 1)
-            //        {
-            //            if (name[1] == "name") { chCntr.Left = NameAdd.Left; chCntr.Width = NameAdd.Width; chCntr.Height = NameAdd.Height; }
-            //            else if (name[1] == "brand") { chCntr.Left = BrandAdd.Left - left; }
-            //            else if (name[1] == "gender") { chCntr.Left = GenderAdd.Left - left; }
-            //            else if (name[1] == "image") { chCntr.Left = ImageAdd.Left - left; }
-            //            else if (name[1] == "delete") { chCntr.Left = BtnAdd.Left + left; }
-            //            else if (name[1] == "open") { chCntr.Left = BtnAdd.Left + 5 + BtnAdd.Width; }
-            //        }
-            //    }
-            //}
+            foreach (Panel p in productListPanel.Controls)
+            {
+                p.Width = Convert.ToInt32(productListPanel.Width * 0.97);
+                foreach (Control chCntr in p.Controls)
+                {
+                    string[] name = chCntr.Name.Split(',');
+                    if (name.Length > 1)
+                    {
+                        if (name[1] == "name") { chCntr.Width = NameAdd.Width; break;}
+                        //{ chCntr.Left = NameAdd.Left; chCntr.Width = NameAdd.Width; chCntr.Height = NameAdd.Height; }
+                        //else if (name[1] == "brand") { chCntr.Left = BrandAdd.Left - left; }
+                        //else if (name[1] == "gender") { chCntr.Left = GenderAdd.Left - left; }
+                        //else if (name[1] == "image") { chCntr.Left = ImageAdd.Left - left; }
+                        //else if (name[1] == "delete") { chCntr.Left = BtnAdd.Left + left; }
+                        //else if (name[1] == "open") { chCntr.Left = BtnAdd.Left + 5 + BtnAdd.Width; }
+                    }
+                }
+            }
         }
         private void product_Load(object sender, EventArgs e)
         {
@@ -119,6 +120,7 @@ namespace musk_shop_store
 
         private void ImageAdd_Click(object sender, EventArgs e)
         {
+            ImageAdd.Image = null;
             UploadIamge("add", "");
             //productListPanel.Controls.Clear();
         }
@@ -146,7 +148,7 @@ namespace musk_shop_store
 
         }
         /// ------------ retrive my products-------------/
-        int top;int height = 60;string ImageProductPath;
+        int top;int height = 60;string ImageProductPath;bool textBoxWidth = false;
         private void retriveProduct(string name, string categorey, string gender)
         {
             foreach (FlowLayoutPanel flow in productListPanel.Controls)
@@ -174,15 +176,15 @@ namespace musk_shop_store
                 productListPanel.Controls.Add(panel);
                 ////---- create the list number -----///
                 Label listNum = new Label();
-                listNum.Text = "  "+top.ToString();
-                listNum.Width = label1.Width+50;
+                listNum.Text = "  " + Convert.ToInt32(top+1);
+                listNum.Width = label1.Width + 50;
                 listNum.Height = height;
                 listNum.TextAlign=ContentAlignment.MiddleLeft;
                 panel.Controls.Add(listNum);
                 ////---- create the image -----///
-                PictureBox image =new PictureBox();
-                image.Width = ImageAdd.Width ;
-                image.Height = 55; 
+                PictureBox image = new PictureBox();
+                image.Width = ImageAdd.Width;
+                image.Height = 55;
                 ImageProductPath = Environment.CurrentDirectory + "\\image\\download.png";
                 if (File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg"))
                 {
@@ -193,19 +195,43 @@ namespace musk_shop_store
                 image.SizeMode = PictureBoxSizeMode.Zoom;
                 ///------- create a textbox for name -------//
                 RichTextBox txtName = new RichTextBox();
-                txtName.BorderStyle= BorderStyle.None;
+                txtName.Name = dataReader["id"] + "name";
+                txtName.BorderStyle = BorderStyle.None;
                 txtName.Text = dataReader["product_sh.name"].ToString();
                 txtName.Height = 55;
-                txtName.Width = NameAdd.Width;
+                txtName.Margin = new Padding(10, 0, 0, 0);
                 panel.Controls.Add(txtName);
+                if (textBoxWidth == false)
+                {
+                    txtName.Width = NameAdd.Width + 50;
+                }
+                else
+                {
+                    txtName.Width = NameAdd.Width;
+                }
+                ///------- create a textbox for name -------//
+                ComboBox BrandCmb = new ComboBox();
+                BrandCmb.Width = BrandAdd.Width;
+                BrandCmb.Height = 55;
+                BrandCmb.Text = dataReader["category_sh.name"].ToString();
+                BrandCmb.FlatStyle= FlatStyle.Flat;
+                BrandCmb.Margin=new Padding(10,15, 0, 0);
+                panel.Controls.Add(BrandCmb);
                 ////------ finaly ----------------/////
-                if (top % 2 == 0) 
-                { panel.BackColor =Color.FromArgb(230, 230, 230); txtName.BackColor = Color.FromArgb(230, 230, 230); }
+                if (top % 2 == 0)
+                {
+                    panel.BackColor = Color.FromArgb(230, 230, 230);
+                    txtName.BackColor = Color.FromArgb(230, 230, 230);
+                    BrandCmb.BackColor = Color.FromArgb(230, 230, 230);
+                }
                 top++;
             }
-
+            if (textBoxWidth == false)
+            {
+                textBoxWidth = true;
+            }
             prp.Connection.Close();
-            //resizeProductList();
+            //ResizeProductList();
         }
         ///------ upload image-------/////////
         private void UploadIamge(string type, string id)
