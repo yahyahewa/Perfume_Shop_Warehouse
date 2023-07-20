@@ -77,22 +77,16 @@ namespace musk_shop_store
                 p.Width = Convert.ToInt32(productListPanel.Width * 0.97);
                 foreach (Control chCntr in p.Controls)
                 {
-                    string[] name = chCntr.Name.Split(',');
-                    if (name.Length > 1)
+                    if (chCntr is RichTextBox)
                     {
-                        if (name[1] == "name") { chCntr.Width = NameAdd.Width; break;}
-                        //{ chCntr.Left = NameAdd.Left; chCntr.Width = NameAdd.Width; chCntr.Height = NameAdd.Height; }
-                        //else if (name[1] == "brand") { chCntr.Left = BrandAdd.Left - left; }
-                        //else if (name[1] == "gender") { chCntr.Left = GenderAdd.Left - left; }
-                        //else if (name[1] == "image") { chCntr.Left = ImageAdd.Left - left; }
-                        //else if (name[1] == "delete") { chCntr.Left = BtnAdd.Left + left; }
-                        //else if (name[1] == "open") { chCntr.Left = BtnAdd.Left + 5 + BtnAdd.Width; }
+                        chCntr.Width = NameAdd.Width;  
                     }
                 }
             }
         }
         private void product_Load(object sender, EventArgs e)
         {
+            CreateAList();
             loadCategoreyValue();
             //BtnAdd.Image = new Bitmap("C:\\Users\\DELL 7400\\Downloads\\plus.png");
             retriveProduct("", "", "");
@@ -101,6 +95,7 @@ namespace musk_shop_store
         private void product_SizeChanged(object sender, EventArgs e)
         {
             resizeAddProductBar();
+            ResizeProductList();
         }
 
         ///---------------------- check brand
@@ -144,60 +139,35 @@ namespace musk_shop_store
             label5.Left = GenderAdd.Left - 5;
             BtnAdd.Left = auto + 460;
             label6.Left = BtnAdd.Left - 5;
-            ResizeProductList();
 
         }
         /// ------------ retrive my products-------------/
-        int top;int height = 60;string ImageProductPath;bool textBoxWidth = false;
-        private void retriveProduct(string name, string categorey, string gender)
+        private void CreateAList()
         {
-            foreach (FlowLayoutPanel flow in productListPanel.Controls)
-            {
-                foreach (Control control in flow.Controls)
-                {
-                    flow.Controls.Remove(control);
-                    control.Dispose();
-                }
-                productListPanel.Controls.Remove(flow);
-                flow.Dispose();
-            }
-            productListPanel.Controls.Clear();
-            top = 0;
-            prp.Connection.Close();
-            prp.Connection.Open();
-            cmd = new OleDbCommand("SELECT  category_sh.name, product_sh.*, img_product_sh.img FROM (category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh ON product_sh.ID = img_product_sh.prd_id;", prp.Connection);
-            dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
+            for (int i = 0; i < 50; i++)
             {
                 ////---- create a panel object -----///
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Width = Convert.ToInt32(panel1.Width * 0.97);
                 panel.Height = 60;
+                panel.Name = "name,1";
                 productListPanel.Controls.Add(panel);
                 ////---- create the list number -----///
                 Label listNum = new Label();
-                listNum.Text = "  " + Convert.ToInt32(top+1);
+                listNum.Text = "  " + Convert.ToInt32(i + 1);
                 listNum.Width = label1.Width + 50;
                 listNum.Height = height;
-                listNum.TextAlign=ContentAlignment.MiddleLeft;
+                listNum.TextAlign = ContentAlignment.MiddleLeft;
                 panel.Controls.Add(listNum);
                 ////---- create the image -----///
                 PictureBox image = new PictureBox();
                 image.Width = ImageAdd.Width;
                 image.Height = 55;
-                ImageProductPath = Environment.CurrentDirectory + "\\image\\download.png";
-                if (File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg"))
-                {
-                    ImageProductPath = Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg";
-                }
-                image.Image = new Bitmap(ImageProductPath);
                 panel.Controls.Add(image);
                 image.SizeMode = PictureBoxSizeMode.Zoom;
                 ///------- create a textbox for name -------//
                 RichTextBox txtName = new RichTextBox();
-                txtName.Name = dataReader["id"] + "name";
                 txtName.BorderStyle = BorderStyle.None;
-                txtName.Text = dataReader["product_sh.name"].ToString();
                 txtName.Height = 55;
                 txtName.Margin = new Padding(10, 0, 0, 0);
                 panel.Controls.Add(txtName);
@@ -213,25 +183,49 @@ namespace musk_shop_store
                 ComboBox BrandCmb = new ComboBox();
                 BrandCmb.Width = BrandAdd.Width;
                 BrandCmb.Height = 55;
-                BrandCmb.Text = dataReader["category_sh.name"].ToString();
-                BrandCmb.FlatStyle= FlatStyle.Flat;
-                BrandCmb.Margin=new Padding(10,15, 0, 0);
+                BrandCmb.FlatStyle = FlatStyle.Flat;
+                BrandCmb.Margin = new Padding(10, 15, 0, 0);
                 panel.Controls.Add(BrandCmb);
                 ////------ finaly ----------------/////
-                if (top % 2 == 0)
+                if (i % 2 == 0)
                 {
                     panel.BackColor = Color.FromArgb(230, 230, 230);
                     txtName.BackColor = Color.FromArgb(230, 230, 230);
                     BrandCmb.BackColor = Color.FromArgb(230, 230, 230);
                 }
-                top++;
             }
             if (textBoxWidth == false)
             {
                 textBoxWidth = true;
             }
+        }
+        int top; int height = 60; string ImageProductPath; bool textBoxWidth = false;
+        private void retriveProduct(string name, string categorey, string gender)
+        {
+            top = 0;
             prp.Connection.Close();
-            //ResizeProductList();
+            prp.Connection.Open();
+            cmd = new OleDbCommand("SELECT top 50 category_sh.name, product_sh.*, img_product_sh.img FROM (category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh ON product_sh.ID = img_product_sh.prd_id;", prp.Connection);
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if (productListPanel.Controls.Count > 0)
+                {
+                    foreach (Control Cnt in productListPanel.Controls[top].Controls)
+                    {
+                        if (Cnt is PictureBox pictureBox &&
+                            File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg"))
+                        {
+                            pictureBox.Image = new Bitmap(Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg");
+                        }
+                        else if (Cnt is RichTextBox) { Cnt.Text = dataReader["product_sh.name"].ToString(); }
+                        else if (Cnt is ComboBox) { Cnt.Text = dataReader["category_sh.name"].ToString(); }
+
+                    }
+                    top++;
+                }
+            }
+            prp.Connection.Close();
         }
         ///------ upload image-------/////////
         private void UploadIamge(string type, string id)
@@ -288,18 +282,6 @@ namespace musk_shop_store
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-
-
-            foreach (Control panel in productListPanel.Controls)
-            {
-                foreach (Control control in panel.Controls)
-                {
-                    control.Dispose();
-                }
-                panel.Controls.Clear();
-                panel.Dispose();
-            }
-            productListPanel.Controls.Clear();
             if (NameAdd.Text != "" && checkBrand() == true && (GenderAdd.Text == "Fe-Male" || GenderAdd.Text == "Male"))
             {
                 //    BtnAdd.Image = new Bitmap("C:\\Users\\DELL 7400\\Downloads\\loader.png");
@@ -313,7 +295,7 @@ namespace musk_shop_store
                         int a = prp.retNum("select max(id) from product_sh");
                         if (prp.query("insert into img_product_sh(prd_id,img) values(" + a + ",'" + newfileName + "')"))
                         {
-                            newfileName = "";
+                            //newfileName = "";
                         }
                     }
                     retriveProduct("", "", "");
