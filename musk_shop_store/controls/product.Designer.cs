@@ -31,6 +31,10 @@ namespace musk_shop_store
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.productListPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.AddPanel = new System.Windows.Forms.Panel();
             this.BtnAdd = new System.Windows.Forms.PictureBox();
             this.isSearch = new System.Windows.Forms.CheckBox();
@@ -45,19 +49,15 @@ namespace musk_shop_store
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.productListPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.AddPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageAdd)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -84,9 +84,50 @@ namespace musk_shop_store
             this.panel1.Size = new System.Drawing.Size(884, 532);
             this.panel1.TabIndex = 0;
             // 
+            // productListPanel
+            // 
+            this.productListPanel.AutoScroll = true;
+            this.productListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productListPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.productListPanel.Location = new System.Drawing.Point(0, 87);
+            this.productListPanel.Name = "productListPanel";
+            this.productListPanel.Size = new System.Drawing.Size(884, 395);
+            this.productListPanel.TabIndex = 5;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 482);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(884, 50);
+            this.panel3.TabIndex = 4;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(122)))));
+            this.pictureBox2.Location = new System.Drawing.Point(247, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(65, 41);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 10;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(122)))));
+            this.pictureBox1.Location = new System.Drawing.Point(547, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(65, 41);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
             // AddPanel
             // 
-            this.AddPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.AddPanel.BackColor = System.Drawing.Color.White;
             this.AddPanel.Controls.Add(this.BtnAdd);
             this.AddPanel.Controls.Add(this.isSearch);
             this.AddPanel.Controls.Add(this.NameAdd);
@@ -94,7 +135,7 @@ namespace musk_shop_store
             this.AddPanel.Controls.Add(this.BrandAdd);
             this.AddPanel.Controls.Add(this.ImageAdd);
             this.AddPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.AddPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
+            this.AddPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.AddPanel.Location = new System.Drawing.Point(0, 37);
             this.AddPanel.Name = "AddPanel";
             this.AddPanel.Size = new System.Drawing.Size(884, 50);
@@ -129,11 +170,12 @@ namespace musk_shop_store
             this.NameAdd.Size = new System.Drawing.Size(169, 33);
             this.NameAdd.TabIndex = 6;
             this.NameAdd.Text = "";
+            this.NameAdd.TextChanged += new System.EventHandler(this.NameAdd_TextChanged);
             // 
             // GenderAdd
             // 
             this.GenderAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.GenderAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.GenderAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.GenderAdd.FormattingEnabled = true;
             this.GenderAdd.Items.AddRange(new object[] {
             "All",
@@ -148,7 +190,7 @@ namespace musk_shop_store
             // BrandAdd
             // 
             this.BrandAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BrandAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.BrandAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.BrandAdd.FormattingEnabled = true;
             this.BrandAdd.Location = new System.Drawing.Point(438, 6);
             this.BrandAdd.Name = "BrandAdd";
@@ -245,47 +287,6 @@ namespace musk_shop_store
             this.label1.TabIndex = 0;
             this.label1.Text = "Search";
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 482);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(884, 50);
-            this.panel3.TabIndex = 4;
-            // 
-            // productListPanel
-            // 
-            this.productListPanel.AutoScroll = true;
-            this.productListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productListPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
-            this.productListPanel.Location = new System.Drawing.Point(0, 87);
-            this.productListPanel.Name = "productListPanel";
-            this.productListPanel.Size = new System.Drawing.Size(884, 395);
-            this.productListPanel.TabIndex = 5;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(122)))));
-            this.pictureBox1.Location = new System.Drawing.Point(547, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(65, 41);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(122)))));
-            this.pictureBox2.Location = new System.Drawing.Point(247, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(65, 41);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 10;
-            this.pictureBox2.TabStop = false;
-            // 
             // product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,15 +299,15 @@ namespace musk_shop_store
             this.SizeChanged += new System.EventHandler(this.product_SizeChanged);
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.AddPanel.ResumeLayout(false);
             this.AddPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageAdd)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -150,7 +150,6 @@ namespace musk_shop_store
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Width = Convert.ToInt32(panel1.Width * 0.97);
                 panel.Height = 60;
-                panel.Name = "name,1";
                 productListPanel.Controls.Add(panel);
                 ////---- create the list number -----///
                 Label listNum = new Label();
@@ -163,6 +162,7 @@ namespace musk_shop_store
                 PictureBox image = new PictureBox();
                 image.Width = ImageAdd.Width;
                 image.Height = 55;
+                image.Name = "name";
                 panel.Controls.Add(image);
                 image.SizeMode = PictureBoxSizeMode.Zoom;
                 ///------- create a textbox for name -------//
@@ -179,19 +179,45 @@ namespace musk_shop_store
                 {
                     txtName.Width = NameAdd.Width;
                 }
-                ///------- create a textbox for name -------//
+                ///------- create a combobox for brand -------//
                 ComboBox BrandCmb = new ComboBox();
                 BrandCmb.Width = BrandAdd.Width;
                 BrandCmb.Height = 55;
                 BrandCmb.FlatStyle = FlatStyle.Flat;
                 BrandCmb.Margin = new Padding(10, 15, 0, 0);
                 panel.Controls.Add(BrandCmb);
+                ///------- create a textbox for name -------//
+                ComboBox gender = new ComboBox();
+                gender.Width = GenderAdd.Width;
+                gender.Height = 55;
+                gender.FlatStyle = FlatStyle.Flat;
+                gender.Margin = new Padding(10, 15, 0, 0);
+                panel.Controls.Add(gender);
+                ///------- create a button for delete -------//
+                PictureBox delete = new PictureBox();
+                if (File.Exists(Environment.CurrentDirectory + "\\image\\delete.png"))
+                    delete.Image = new Bitmap(Environment.CurrentDirectory + "\\image\\delete.png");
+                delete.SizeMode = PictureBoxSizeMode.StretchImage;
+                delete.Margin = new Padding(25, 15, 0, 0);
+                delete.Height = 35;
+                delete.Width = 35;
+                panel.Controls.Add(delete);
+                ///------- create a button for open -------//
+                PictureBox open = new PictureBox();
+                if (File.Exists(Environment.CurrentDirectory + "\\image\\open.png"))
+                    open.Image = new Bitmap(Environment.CurrentDirectory + "\\image\\open.png");
+                open.SizeMode = PictureBoxSizeMode.StretchImage;
+                open.Margin = new Padding(25, 15, 0, 0);
+                open.Height = 35;
+                open.Width = 35;
+                panel.Controls.Add(open);
                 ////------ finaly ----------------/////
                 if (i % 2 == 0)
                 {
                     panel.BackColor = Color.FromArgb(230, 230, 230);
                     txtName.BackColor = Color.FromArgb(230, 230, 230);
                     BrandCmb.BackColor = Color.FromArgb(230, 230, 230);
+                    gender.BackColor = Color.FromArgb(230, 230, 230);
                 }
             }
             if (textBoxWidth == false)
@@ -199,34 +225,55 @@ namespace musk_shop_store
                 textBoxWidth = true;
             }
         }
-        int top; int height = 60; string ImageProductPath; bool textBoxWidth = false;
+        int top; int height = 60; string ImageProductPath;
+        bool textBoxWidth = false, chooseBrandAndGender = false, selectImage = true;
         private void retriveProduct(string name, string categorey, string gender)
         {
-            top = 0;
             prp.Connection.Close();
             prp.Connection.Open();
-            cmd = new OleDbCommand("SELECT top 50 category_sh.name, product_sh.*, img_product_sh.img FROM (category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh ON product_sh.ID = img_product_sh.prd_id;", prp.Connection);
-            dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
-            {
-                if (productListPanel.Controls.Count > 0)
-                {
-                    foreach (Control Cnt in productListPanel.Controls[top].Controls)
-                    {
-                        if (Cnt is PictureBox pictureBox &&
-                            File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg"))
-                        {
-                            pictureBox.Image = new Bitmap(Environment.CurrentDirectory + "\\image\\product\\" + dataReader["img"] + ".jpeg");
-                        }
-                        else if (Cnt is RichTextBox) { Cnt.Text = dataReader["product_sh.name"].ToString(); }
-                        else if (Cnt is ComboBox) { Cnt.Text = dataReader["category_sh.name"].ToString(); }
-
-                    }
-                    top++;
-                }
-            }
+            adapter = new OleDbDataAdapter("SELECT top 50 category_sh.name, product_sh.*, img_product_sh.img FROM " +
+                "(category_sh INNER JOIN product_sh ON category_sh.ID = product_sh.ctg_id) LEFT JOIN img_product_sh" +
+                " ON product_sh.ID = img_product_sh.prd_id where product_sh.name='" + name + "'", prp.Connection);
+            dataTable = new DataTable();
+            adapter.Fill(dataTable);
             prp.Connection.Close();
+
+            DataRow[] dataRows = dataTable.Select();
+
+            for (int i = 0; i < productListPanel.Controls.Count; i++)
+            {
+                productListPanel.Controls[i].Visible = true;
+                if (i < dataRows.Length)
+                {
+                    DataRow row = dataRows[i];
+                    //string categoryName = row["name"].ToString();
+                    foreach(Control control in productListPanel.Controls[i].Controls)
+                    {
+                        if (control is PictureBox pictureBox &&
+                               File.Exists(Environment.CurrentDirectory + "\\image\\product\\" + row["img"] + ".jpeg")
+                               && control.Name == "name")
+                        {
+                            pictureBox.Image = new Bitmap(Environment.CurrentDirectory + "\\image\\product\\" + row["img"] + ".jpeg");
+                        }
+                        else if (control is RichTextBox)
+                        { control.Text = row["product_sh.name"].ToString(); }
+                        else if (control is ComboBox && chooseBrandAndGender == false)
+                        { control.Text = row["category_sh.name"].ToString(); chooseBrandAndGender = true; }
+                        else if (control is ComboBox && chooseBrandAndGender == true)
+                        { control.Text = row["gender"].ToString(); chooseBrandAndGender = false; }
+                    }
+                }
+                else
+                    productListPanel.Controls[i].Visible = false;
+            }
+
         }
+
+        private void NameAdd_TextChanged(object sender, EventArgs e)
+        {
+            retriveProduct(NameAdd.Text, "", "");
+        }
+
         ///------ upload image-------/////////
         private void UploadIamge(string type, string id)
         {
